@@ -21,9 +21,9 @@
                 {% endif %}
               </div>
             </a>
-            <div class="cont">
-              <h5 class="card-title">{{ review.title }}</h5>
-              <p>
+
+            <div class="d-flex mt-2">
+              <div class="mt-2">
                 <a href="{% url 'accounts:profile'  %}">
                   {% for profile_se in review.user.profile_set.all %}
                     {% if profile_se.image %}
@@ -32,11 +32,19 @@
                       <img src="https://dummyimage.com/1200x960/000000/c4c4c4" alt="image" style="width: 35px; height: 35px; border-radius: 500px">
                     {% endif %}
                   {% endfor %}
-                  <span>
+                </a>
+              </div>
+              <div class="mx-2">
+                <a href="{% url 'reviews:detail' review.pk%}">
+                  <h5 class="card-title">{{ review.title }}</h5>
+                </a>
+                <a href="{% url 'accounts:profile'  %}">
+                  <span class="text-muted">
                     {{review.user.username}}
                   </span>
-                </p>
-              </a>
+                </a>
+              </div>
+
             </div>
           </div>
         </div>

@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+
+import reviews
 from .forms import CustomUserCreationForm, CustomUserChangeForm, ProfileForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from ..reviews.models import Review
 
 # Create your views here.
 @login_required
@@ -132,3 +135,11 @@ def profile_update(request):
         "profile_form": form,
     }
     return render(request, "accounts/profile_update.html", context)
+
+
+# def channel(request, article_pk):
+#     review = Review.objects.get(pk=article_pk)
+#     context = {
+#         "review": review,
+#     }
+#     return render(request, "accounts/channel.html", context)
