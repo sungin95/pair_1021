@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
+    "accounts",
     "reviews",
     "django_bootstrap5",
     "imagekit",
@@ -139,4 +139,3 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
-
