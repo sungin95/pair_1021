@@ -14,8 +14,15 @@ from .models import Profile
 @login_required
 def index(request):
     users = get_user_model().objects.all()
+    artist = []
+    for user in users:
+        a = user.review_set.all()
+        if len(a) >= 1:
+            artist.append(user)
+
     context = {
         "users": users,
+        "artist": artist,
     }
     return render(request, "accounts/index.html", context)
 
@@ -135,4 +142,3 @@ def profile_update(request):
         "profile_form": form,
     }
     return render(request, "accounts/profile_update.html", context)
-
