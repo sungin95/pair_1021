@@ -2,10 +2,11 @@
 {% load django_bootstrap5 %}
 {% block content %}
 
-  <h1>signUp</h1>
+  <h1>update</h1>
   <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button type="submit" class="btn btn-outline-dark">제출</button>
+    <input type="submit" value="제출"/>
+    <button type="button" class="btn btn-outline-dark" onclick="location.href='{% url 'accounts:index' %}' ">돌아가기</button>
   </form>
 {% endblock content %}
