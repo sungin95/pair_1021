@@ -31,3 +31,7 @@ ul {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 1;
 }
+
+.thumb img {
+	width: 100%;
+}
