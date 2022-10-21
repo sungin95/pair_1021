@@ -38,7 +38,7 @@
                 <a href="{% url 'reviews:detail' review.pk%}">
                   <h5 class="card-title">{{ review.title }}</h5>
                 </a>
-                <a href="{% url 'accounts:profile'  %}">
+                <a href="{% url 'accounts:detail' review.user.pk %}">
                   <span class="text-muted">
                     {{review.user.username}}
                   </span>

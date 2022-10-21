@@ -1,22 +1,46 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-  <h1>상세 회원 정보</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">user</th>
-        <th scope="col">email</th>
-        <th scope="col">last_login</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">{{ user.username}}</th>
-        <td>{{ user.email}}</td>
-        <td>{{ user.last_login}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <h1>{{ user.username}}</h1>
+  <p>
+    게시글 :
+    {{user.review_set.count}}
+    개</p>
+  <div>
+
+    {% for review in user.review_set.all %}
+      <div class='row'>
+        <div class="col-6">
+          {% if review.image %}
+            <a href="{% url 'reviews:detail' review.pk %}">
+              <p class="thumbimg">
+                <img src="{{ review.thumbnail.url }}" alt="{{ review.image }}">
+              </p>
+              <p>
+                {{ review.title }}
+              </p>
+            {% endif %}
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class"mt-5"="class" mt-5""="mt-5" "">
+    <h4>작성한 댓글</h4>
+    <p>
+      댓글:
+      {{user.comment_set.count}}
+      개
+    </p>
+    {% for comment in user.comment_set.all %}
+      <p>
+        {{forloop.counter}}
+        <a href="{% url 'reviews:detail' comment.review_id %}">
+          {{comment.content}}
+        </a>
+      </p>
+    {% endfor %}
+  </div>
+
   <button type="button" class="btn btn-outline-dark" onclick="location.href='{% url 'accounts:index' %}' ">돌아가기</button>
 {% endblock content %}

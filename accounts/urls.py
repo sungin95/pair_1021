@@ -16,5 +16,4 @@ urlpatterns = [
     path("update/", views.update, name="update"),
     path("profile/", views.profile, name="profile"),
     path("profile/update/", views.profile_update, name="profile_update"),
-    path("channel/<int:article_pk>", views.channel, name="channel"),
 ]

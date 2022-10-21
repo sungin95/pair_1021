@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
+
   <div class=" mt-3">
+    <h3>{{user.username}}
+      My page</h3>
     {% if profile.image %}
-      <img src="{{ profile.image.url }}" alt="" style="width: 80px; height: 80px; border-radius: 500px">
+      <img src="{{ profile.image.url }}" alt="" style="width: 100px; height: 100px; border-radius: 500px">
     {% else %}
-      <img src="https://dummyimage.com/1200x960/000000/c4c4c4" class="" style="width: 500px; height: 500px;">
+      <img src="https://dummyimage.com/1200x960/000000/c4c4c4" class="" style="width: 100px; height: 100px;">
     {% endif %}
     <a href="{% url 'accounts:profile_update' %}" class='btn btn-outline-success ms-5'>프로필 수정</a>
   </div>
@@ -18,13 +21,20 @@
             <p>{{ review.title }}</p>
           </a>
         </div>
+        {% empty %}
+        <div>
+          <p>작성한 글이 없습니다.</p>
+        </div>
       {% endfor %}
     </div>
     <div>
       <h3>내가 쓴 댓글</h3>
       {% for comment in comments %}
         <p>{{ comment.content }}
-        </p>
+        </p>{% empty %}
+
+        <p>작성한 댓글이 없습니다.</p>
+
       {% endfor %}
     </div>
   </div>
