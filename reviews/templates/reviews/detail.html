@@ -1,7 +1,26 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-  {% if messages %}
+  <h1 class="my-5">{{ review.pk }}번 게시글</h1>
+  <p>{{ review.title }}
+  </p>
+  <p>{{ review.content }}
+  </p>
+  <div class="d-flex justify-content-end">
+    <a class='btn btn-danger me-2' href="{% url 'reviews:update' review.pk %}">수정하기</a>
+    <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">삭제하기</button>
+    </div>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+          <div class="container">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          {% endfor %}
+        {% endif %}
+ {% if messages %}
     {% for message in messages %}
       <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
         <div class="container">
