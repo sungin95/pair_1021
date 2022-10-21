@@ -9,18 +9,16 @@ from django.contrib import messages
 
 
 def index(request):
-    reviews = Review.objects.order_by('-pk')
-    context = {
-        'reviews':reviews
-    }
-    return render(request, 'reviews/index.html', context)
-
+    reviews = Review.objects.order_by("-pk")
+    context = {"reviews": reviews}
+    return render(request, "reviews/index.html", context)
 
 
 def detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
     context = {
+        "review": review,
         "comments": review.comment_set.all(),
         "comment_form": comment_form,
     }
@@ -28,20 +26,18 @@ def detail(request, pk):
 
 
 def create(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         review_form = ReviewForm(request.POST)
         if review_form.is_valid():
-            review = review_form.save(commit=False) 
-            review.user = request.user 
+            review = review_form.save(commit=False)
+            review.user = request.user
             review.save()
-            messages.success(request, '글 작성이 완료되었습니다.')
-            return redirect('reviews:index')
+            messages.success(request, "글 작성이 완료되었습니다.")
+            return redirect("reviews:index")
     else:
         review_form = ReviewForm()
-    context = {
-        'review_form':review_form
-    }
-    return render(request, 'reviews/form.html', context)
+    context = {"review_form": review_form}
+    return render(request, "reviews/form.html", context)
 
 
 def update(request, pk):
@@ -64,7 +60,7 @@ def comment_create(request, pk):
     return redirect("reviews:detail", pk)
 
 
-def commnet_delete(request, pk, comment_pk):
+def comment_delete(request, pk, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
     if request.user == comment.user:
         comment.delete()

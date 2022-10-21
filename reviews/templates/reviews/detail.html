@@ -18,9 +18,9 @@
             개</p>
         {% endif %}
         {% if request.user.is_authenticated %}
-          <form action="{% url 'reviews:comment_creaet' review.pk %}" method="POST">
+          <form action="{% url 'reviews:comment_create' review.pk %}" method="POST">
             {% csrf_token %}
-            {% bootstrap_form comment_form layout='inline'%}
+            {% bootstrap_form comment_form %}
             <button class="btn btn-outline-primary" type="submit">등록</button>
           </form>
         {% endif %}
@@ -34,7 +34,7 @@
                 <span>|
                   {{ comment.created_at }}</span>
                 {% if request.user == comment.user %}
-                  <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" method="POST">
+                  <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-outline-danger" type="submit">삭제</button>
                   </form>
@@ -45,6 +45,7 @@
                 작성된 댓글이 없습니다.
               </li>
             </ul>
-          </div>
+          {% endfor %}
         </div>
-      {% endblock content %}
+      </div>
+    {% endblock content %}
