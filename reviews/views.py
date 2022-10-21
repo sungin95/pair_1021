@@ -5,6 +5,22 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+
+def index(request):
+    pass
+
+def detail(request, pk):
+    pass
+
+def create(request):
+    pass
+
+def update(request, pk):
+    pass
+
+def delete(request, pk):
+    pass
+
 @login_required
 def comment_create(request, review_pk):
     review = Reveiw.objects.get(pk=review_pk)
