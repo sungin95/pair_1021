@@ -24,10 +24,11 @@ def detail(request, pk):
     }
     return render(request, "reviews/detail.html", context)
 
+
 @login_required
 def create(request):
     if request.method == "POST":
-        review_form = ReviewForm(request.POST)
+        review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.user = request.user
@@ -39,34 +40,31 @@ def create(request):
     context = {"review_form": review_form}
     return render(request, "reviews/form.html", context)
 
+
 @login_required
 def update(request, pk):
     review = Review.objects.get(pk=pk)
 
-    if request.method == 'POST':
-        review_form = ReviewForm(request.POST, request.FILES, instance=review) 
+    if request.method == "POST":
+        review_form = ReviewForm(request.POST, request.FILES, instance=review)
         if review_form.is_valid():
             review_form.save()
-            messages.success(request, '글 수정 완료!')
-            return redirect('reviews:detail', review.pk)
+            messages.success(request, "글 수정 완료!")
+            return redirect("reviews:detail", review.pk)
     else:
-        review_form  = ReviewForm(instance=review) 
+        review_form = ReviewForm(instance=review)
 
-    context = {
-        'review_form' : review_form
-        }
-    return render(request, 'reviews/form.html', context)
+    context = {"review_form": review_form}
+    return render(request, "reviews/form.html", context)
 
 
 def delete(request, pk):
-    review = ReviewForm.objects.get(pk=pk)
-    if request.method == 'POST':
+    review = Review.objects.get(pk=pk)
+    if request.method == "POST":
         review.delete()
-        return redirect('reviews:index')
-    context = {
-        'review':review
-    }
-    return render(request, 'reviews/index.html', context)
+        return redirect("reviews:index")
+    context = {"review": review}
+    return render(request, "reviews/index.html", context)
 
 
 @login_required
