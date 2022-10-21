@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-  <h1>회원 목록</h1>
+  <h1>상세 회원 정보</h1>
   <table class="table">
     <thead>
       <tr>
@@ -11,16 +11,12 @@
       </tr>
     </thead>
     <tbody>
-      {% for user in users %}
-        <tr>
-          <th scope="row">
-            <a href="{% url 'accounts:detail' user.pk %}">{{ user.username}}</a>
-          </th>
-          <td>{{ user.email}}</td>
-          <td>{{ user.last_login}}</td>
-        </tr>
-      {% endfor %}
+      <tr>
+        <th scope="row">{{ user.username}}</th>
+        <td>{{ user.email}}</td>
+        <td>{{ user.last_login}}</td>
+      </tr>
     </tbody>
   </table>
-
+  <button type="button" class="btn btn-outline-dark" onclick="location.href='{% url 'accounts:index' %}' ">돌아가기</button>
 {% endblock content %}
