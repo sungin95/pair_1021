@@ -71,3 +71,9 @@ def detail(request, pk):
         "user": user,
     }
     return render(request, "accounts/detail.html", context)
+
+
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
+    return redirect("accounts:login")
