@@ -100,8 +100,8 @@ def signup(request):
 
 ```python
 def profile_update(request):
-    user_ = get_user_model().objects.get(pk=request.user.pk)
-    current_user = user_.profile_set.all()[0]
+    user_ = get_user_model().objects.get(pk=request.user.pk) # 로그인한 유저 정보
+    current_user = user_.profile_set.all()[0]                # 그 유저의 프로필 
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=current_user)
         if form.is_valid():
@@ -134,7 +134,7 @@ def profile_update(request):
 #### 프로필 사진 보여주기
 
 ```html
-{% for profile in review.user.profile_set.all %}
+{% for profile in review.user.profile_set.all %} <!-- 핵심: review.user.profile_set.all -->
 
 	<img src="{{ profile.image.url }}" alt="{{ profile.image }}">
 
